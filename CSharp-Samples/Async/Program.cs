@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Net.Http;
 
@@ -16,13 +17,10 @@ namespace Async
         static async Task<String> GetPageAsync(string url)
         {
             var httpClient = new HttpClient();
-            Task<String> t = httpClient.GetStringAsync(url);
-
-
-            String result = await t;
-
-
-
+            String result = await httpClient.GetStringAsync(url);
+            //Console.WriteLine(Thread.CurrentThread.IsThreadPoolThread); //true
+            //this code will be run by threadpool thread
+            
             return result;
         }
 
